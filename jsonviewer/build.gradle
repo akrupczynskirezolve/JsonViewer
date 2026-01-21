@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
-group = 'com.yuyang.library'
+group = 'com.github.akrupczynski'
 
 android {
     namespace 'com.yuyh.jsonviewer.library'
@@ -25,6 +25,13 @@ android {
         abortOnError false
     }
 
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
 }
 
 dependencies {
@@ -32,15 +39,16 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
 }
 
-//task androidJavadocs(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//}
-//
-//task androidJavadocsJar(type: Jar) {
-//    classifier = 'javadoc'
-//    from androidJavadocs.destinationDir
-//}
-//task androidSourcesJar(type: Jar) {
-//    classifier = 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.akrupczynski'
+                artifactId = 'jsonviewer'
+                version = '1.0.0'
+            }
+        }
+    }
+}
