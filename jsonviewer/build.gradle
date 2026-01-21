@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
-group = 'com.github.akrupczynski'
+group = 'com.github.akrupczynskirezolve'
 
 android {
     namespace 'com.yuyh.jsonviewer.library'
@@ -9,8 +9,8 @@ android {
         minSdk 29
         targetSdk 36
         compileSdk 36
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
     }
 
@@ -45,9 +45,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.akrupczynski'
+                groupId = 'com.github.akrupczynskirezolve'
                 artifactId = 'jsonviewer'
-                version = '1.0.0'
+                version = '1.0.1'
             }
         }
     }
