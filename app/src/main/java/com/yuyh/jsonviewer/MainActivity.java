@@ -1,17 +1,20 @@
 package com.yuyh.jsonviewer;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.yuyh.jsonviewer.library.JsonRecyclerView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclewView.setScaleEnable(true);
         mRecyclewView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() { // 避免双指缩放与上下左右滑动冲突
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent event) {
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent event) {
                 switch (event.getAction() & event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
                         break;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
 
             }
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     int lenght = is.available();
                     byte[] buffer = new byte[lenght];
                     is.read(buffer);
-                    final String result = new String(buffer, "utf8");
+                    final String result = new String(buffer, StandardCharsets.UTF_8);
                     is.close();
 
                     runOnUiThread(new Runnable() {
